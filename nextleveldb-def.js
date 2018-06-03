@@ -222,13 +222,14 @@ const tables = [
     //['exchange markets', ['!market_exchange_coin fk=> exchange coins', '!base_exchange_coin fk=> exchange coins', 'min trade size', 'name', 'is active', 'logo_url']],
 
 
-    ['exchange markets', [['market_exchange_coin fk=> exchange coins', 'base_exchange_coin fk=> exchange coins'], ['min trade size', '&name', 'is active', 'logo_url']]],
+    // Seems to be not much more than putting the snapshot records together and storing them now.
+
+
+    ['exchange markets', [['exchange_id fk=> exchanges', 'market_exchange_coin_id fk=> exchange coins', 'base_exchange_coin_id fk=> exchange coins'], ['min trade size', '&name', 'is active', 'logo_url']]],
     // Index the market names, but don't enforce uniqueness
     // & index would make sense here.
     // & means index by that field, for lookup, but don't assume or enforce unique fields there.
     // 
-
-
 
     // IsActive, Created (from bittrex)
     // summary snapshots
@@ -236,7 +237,25 @@ const tables = [
     //  or combined, they are unique, part of the key.
 
     // timestamp is part of the pk
-    ['exchange market summary snapshots', [['exchange_market_id fk=> exchange markets', 'timestamp'], ['last', 'bid', 'ask', 'volume', 'base_volume', 'open_buy_orders', 'open_sell_orders']]],
+
+    // The whole key of exchange markets...
+    //  It is a bit of a tricky thing to refer to the full key of another record.
+    //  Possibly call it 'key' instead.
+
+
+
+    // exchange_market_key fk=>
+    //  They don't have an ID field.
+    //  ID makes most sense when it's a single field.
+    //   Have not defined composite field aliases
+
+
+
+
+
+
+
+    ['exchange market summary snapshots', [['exchange_market_key fk=> exchange markets', 'timestamp'], ['last', 'bid', 'ask', 'volume', 'base_volume', 'open_buy_orders', 'open_sell_orders']]],
 
     // different types of volume
     //  volume in that currency (amount) and volume in the base currency
@@ -261,7 +280,7 @@ const tables = [
 
     // Next coding work is to get the 
 
-    ['exchange trades', [['exchange_market_id fk=> exchange markets', 'timestamp'], ['id', 'price', 'amount', 'volume', 'is_buy', 'is_partial_fill']]],
+    ['exchange trades', [['exchange_market_key fk=> exchange markets', 'timestamp'], ['id', 'price', 'amount', 'volume', 'is_buy', 'is_partial_fill']]],
 
     // 
     //['exchange trades', ['!exchange_market_id fk=> exchange markets', '!timestamp', 'id', 'price', 'amount', 'volume', 'is_buy', 'is_partial_fill']],
@@ -271,7 +290,7 @@ const tables = [
     //['exchange candlesticks', ['!exchange_market_id fk=> exchange markets', 'timespan', 'start_time'], ['open', 'low', 'high', 'close', 'volume']],
 
     // base_volume too?
-    ['exchange candlesticks', [['exchange_market_id fk=> exchange markets', 'timelength', 'start_time'], ['open', 'low', 'high', 'close', 'volume']]],
+    ['exchange candlesticks', [['exchange_market_key fk=> exchange markets', 'timelength', 'start_time'], ['open', 'low', 'high', 'close', 'volume']]],
 
 
     // Maybe these could be the more generic time series values.

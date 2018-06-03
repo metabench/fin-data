@@ -16,7 +16,7 @@ const assign = (target, source, property_names) => {
 
 class Exchange_Market {
     constructor(spec) {
-        assign(this, spec, ['exchange', 'market_coin_on_exchange', 'base_coin_on_exchange', 'min_trade_size', 'name', 'is_active', 'logo_url']);
+        assign(this, spec, ['exchange', 'market_exchange_coin', 'base_exchange_coin', 'min_trade_size', 'name', 'is_active', 'logo_url']);
     }
 
     // Then to turn it to a db row.
@@ -26,7 +26,7 @@ class Exchange_Market {
 
 
     get arr_row() {
-        let res = [[this.market_coin_on_exchange.id, this.base_coin_on_exchange.id], [this.min_trade_size, this.name, this.is_active, this.logo_url]];
+        let res = [[this.market_exchange_coin.id, this.base_exchange_coin.id], [this.min_trade_size, this.name, this.is_active, this.logo_url]];
         return res;
     }
 
