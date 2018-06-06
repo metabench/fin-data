@@ -21,8 +21,24 @@ class Coin {
 
     // old codes?
 
+    // let coin = new Coin(coin_used.decoded_no_kp);
+    //console.log('coin', coin);
+
+    // [ [ 216 ], [ 'LRC', 'Loopring' ] ]
+    //  if the spec is an array...
+
+
     constructor(spec) {
-        assign(this, spec, ['code', 'name']);
+
+
+        if (Array.isArray(spec)) {
+            // Should have an id...
+            [[this.id], [this.code, this.name]] = spec;
+        } else {
+            assign(this, spec, ['code', 'name']);
+        }
+
+
     }
 
     // want to be able to get a coin as a B_Record?

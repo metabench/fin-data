@@ -15,7 +15,7 @@ const assign = (target, source, property_names) => {
 
 class Exchange {
     constructor(spec) {
-        assign(this, spec, ['name'])
+        assign(this, spec, ['id', 'name']);
     }
     toString() {
         return '{EXCHANGE: ' + this.name + '}';

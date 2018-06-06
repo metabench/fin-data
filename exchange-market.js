@@ -24,11 +24,18 @@ class Exchange_Market {
 
     // get the buffer backed record?
 
+    // market_exchange_coin.key
 
+    // Seems like a bit needs to be re-done.
+
+
+    /*
+    Not sure this is correct anyway.
     get arr_row() {
         let res = [[this.market_exchange_coin.id, this.base_exchange_coin.id], [this.min_trade_size, this.name, this.is_active, this.logo_url]];
         return res;
     }
+    */
 
 
 

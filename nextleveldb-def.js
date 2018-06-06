@@ -198,12 +198,8 @@ const tables = [
     //               
     //  !            field is part of the PK, milti ! makes the pk
 
-
-
-
     // ! here denoting that some of these are parts of the key?
     //  More like indicating that together they
-
 
     // Can just say each of them are the primary key.
 
@@ -212,20 +208,40 @@ const tables = [
 
     //['exchange coins', ['!exchange_id fk=> exchanges', '!coin_id fk=> coins', 'info']],
     // keep reference to the coins on that exchange
-
     // Putting the name in the key?
     //  No, the key would be too big that way.
     //  Having a unique constraint and index for the name would help.
 
-
     // ! fields together make the PK.
     //['exchange markets', ['!market_exchange_coin fk=> exchange coins', '!base_exchange_coin fk=> exchange coins', 'min trade size', 'name', 'is active', 'logo_url']],
-
-
     // Seems to be not much more than putting the snapshot records together and storing them now.
 
 
-    ['exchange markets', [['exchange_id fk=> exchanges', 'market_exchange_coin_id fk=> exchange coins', 'base_exchange_coin_id fk=> exchange coins'], ['min trade size', '&name', 'is active', 'logo_url']]],
+    // Seems a problem here...
+    //  market_exchange_coin_id
+    //  base_exchange_coin_id
+
+    //  The 'id' of exchange coins is actually the key.
+    //   It's not just a single ID field.
+
+    // Data has been stored wrong in the DB. So it seems.
+
+    // 'exchange markets' records need more in their keys.
+    //  makes records longer overall. 
+
+    // Is it a problem with Active_Record?
+
+
+    // Though the exchange id gets put into the key 3 times.
+    //  A bit inefficient there.
+    //  The way it was already is more efficient in that it skipped out the exchange id from the exchange coins.
+    //   Makes lookups harder if we don't have the full keys.
+
+    // Maybe something for skipping fields in keys if we already have defined them.
+
+    //['exchange markets', [['exchange_id fk=> exchanges', 'market_exchange_coin_id fk=> exchange coins', 'base_exchange_coin_id fk=> exchange coins'], ['min trade size', '&name', 'is active', 'logo_url']]],
+    ['exchange markets', [['exchange_id fk=> exchanges', 'market_exchange_coin_key fk=> exchange coins', 'base_exchange_coin_key fk=> exchange coins'], ['min trade size', '&name', 'is active', 'logo_url']]],
+
     // Index the market names, but don't enforce uniqueness
     // & index would make sense here.
     // & means index by that field, for lookup, but don't assume or enforce unique fields there.
@@ -248,12 +264,6 @@ const tables = [
     //  They don't have an ID field.
     //  ID makes most sense when it's a single field.
     //   Have not defined composite field aliases
-
-
-
-
-
-
 
     ['exchange market summary snapshots', [['exchange_market_key fk=> exchange markets', 'timestamp'], ['last', 'bid', 'ask', 'volume', 'base_volume', 'open_buy_orders', 'open_sell_orders']]],
 

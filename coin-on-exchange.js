@@ -41,6 +41,7 @@ class Coin_On_Exchange {
     //  Could use synonyms in various cases.
 
     constructor(spec) {
+        //console.log('Coin_On_Exchange spec', spec);
         assign(this, spec, ['coin', 'exchange', 'code_on_exchange', 'name', 'dt_listed', 'min_confirmations', 'tx_fee', 'is_active', 'base_address', 'coin_type', 'notice']);
     }
 
