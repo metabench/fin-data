@@ -19,6 +19,11 @@ class Exchange_Market {
         assign(this, spec, ['exchange', 'market_exchange_coin', 'base_exchange_coin', 'min_trade_size', 'name', 'is_active', 'logo_url']);
     }
 
+    get key() {
+        //return this.exchange.key.concat(this.market_exchange_coin.key, this.base_exchange_coin.key);
+        return [this.exchange.id, this.market_exchange_coin.key, this.base_exchange_coin.key];
+    }
+
     // Then to turn it to a db row.
     //  Should probably take a reference to the nextleveldb model table, or even active table. Get its table kp
 

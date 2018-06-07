@@ -44,6 +44,11 @@ class Coin_On_Exchange {
         //console.log('Coin_On_Exchange spec', spec);
         assign(this, spec, ['coin', 'exchange', 'code_on_exchange', 'name', 'dt_listed', 'min_confirmations', 'tx_fee', 'is_active', 'base_address', 'coin_type', 'notice']);
     }
+    get key() {
+        //return this.exchange.key.concat(this.coin.key);
+
+        return [this.exchange.id, this.coin.id];
+    }
 
 }
 

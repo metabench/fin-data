@@ -20,6 +20,9 @@ class Exchange {
     toString() {
         return '{EXCHANGE: ' + this.name + '}';
     }
+    get key() {
+        return [this.id];
+    }
 }
 
 module.exports = Exchange;

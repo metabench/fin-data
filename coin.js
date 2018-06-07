@@ -41,6 +41,10 @@ class Coin {
 
     }
 
+    get key() {
+        return [this.id];
+    }
+
     // want to be able to get a coin as a B_Record?
     //  Maybe don't want that dependency here.
 
