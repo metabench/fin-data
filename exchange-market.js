@@ -13,7 +13,6 @@ const assign = (target, source, property_names) => {
     })
 }
 
-
 class Exchange_Market {
     constructor(spec) {
         assign(this, spec, ['exchange', 'market_exchange_coin', 'base_exchange_coin', 'min_trade_size', 'name', 'is_active', 'logo_url']);
@@ -28,11 +27,8 @@ class Exchange_Market {
     //  Should probably take a reference to the nextleveldb model table, or even active table. Get its table kp
 
     // get the buffer backed record?
-
     // market_exchange_coin.key
-
     // Seems like a bit needs to be re-done.
-
 
     /*
     Not sure this is correct anyway.
@@ -41,8 +37,6 @@ class Exchange_Market {
         return res;
     }
     */
-
-
 
 }
 
